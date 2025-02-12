@@ -1,4 +1,4 @@
-﻿namespace Workshop.WebApi.Auth.Cookie.Infrastructure;
+﻿namespace Workshop.WebApi.Cookie.Infrastructure;
 
 public static class Constants
 {

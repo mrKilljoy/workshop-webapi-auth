@@ -1,6 +1,6 @@
-﻿using Workshop.WebApi.Auth.Cookie.Infrastructure.Configuration;
+﻿using Workshop.WebApi.Cookie.Infrastructure.Configuration;
 
-namespace Workshop.WebApi.Auth.Cookie.Infrastructure.Extensions;
+namespace Workshop.WebApi.Cookie.Infrastructure.Extensions;
 
 public static class ConfigurationExtensions
 {

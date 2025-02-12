@@ -1,7 +1,7 @@
 ﻿using Workshop.Shared.Services;
-using Workshop.WebApi.Auth.Cookie.Infrastructure.Configuration;
+using Workshop.WebApi.Cookie.Infrastructure.Configuration;
 
-namespace Workshop.WebApi.Auth.Cookie.Infrastructure.DI;
+namespace Workshop.WebApi.Cookie.Infrastructure.DI;
 
 public static class DependencyRegistration
 {

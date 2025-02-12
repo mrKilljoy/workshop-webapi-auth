@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Workshop.Shared.Services;
 
-namespace Workshop.WebApi.Auth.Cookie.Infrastructure.Authentication;
+namespace Workshop.WebApi.Cookie.Infrastructure.Authentication;
 
 public class CustomCookieAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {

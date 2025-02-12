@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Workshop.Shared.Data;
-using Workshop.WebApi.Auth.Cookie.Infrastructure;
-using Workshop.WebApi.Auth.Cookie.Infrastructure.Authentication;
-using Workshop.WebApi.Auth.Cookie.Infrastructure.DI;
-using Workshop.WebApi.Auth.Cookie.Infrastructure.Extensions;
+using Workshop.WebApi.Cookie.Infrastructure.DI;
+using Workshop.WebApi.Cookie.Infrastructure.Extensions;
+using Workshop.WebApi.Cookie.Infrastructure;
+using Workshop.WebApi.Cookie.Infrastructure.Authentication;
 
-namespace Workshop.WebApi.Auth.Cookie;
+namespace Workshop.WebApi.Cookie;
 
 public class Program
 {
