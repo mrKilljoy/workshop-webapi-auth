@@ -4,6 +4,7 @@ using Workshop.Shared.Data;
 using Workshop.WebApi.Auth.Infrastructure;
 using Workshop.WebApi.Auth.Infrastructure.Authentication;
 using Workshop.WebApi.Auth.Infrastructure.DI;
+using Workshop.WebApi.Auth.Infrastructure.Extensions;
 
 namespace Workshop.WebApi.Auth;
 
@@ -37,6 +38,11 @@ public class Program
         app.UseAuthorization();
         
         app.MapControllers();
+
+        if (app.Configuration.IsTestDataNeeded())
+        {
+            app.Services.AddTestData();
+        }
 
         app.Run();
     }
