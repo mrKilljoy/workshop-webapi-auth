@@ -11,7 +11,10 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services
-            .AddAuthentication();
+            .AddAuthentication(Constants.Authentication.Cookie)
+            .AddScheme<AuthenticationSchemeOptions, CustomCookieAuthenticationHandler>(
+                Constants.Authentication.Cookie,
+                null);
         builder.Services.AddAuthorization();
 
         builder.Services.AddControllers();
