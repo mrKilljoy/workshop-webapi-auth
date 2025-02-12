@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Workshop.Shared.Data;
 using Workshop.WebApi.Auth.Infrastructure;
 using Workshop.WebApi.Auth.Infrastructure.Authentication;
 
@@ -19,6 +21,9 @@ public class Program
 
         builder.Services.AddControllers();
         builder.Services.AddDataProtection();
+
+        builder.Services.AddDbContext<UserDbContext>(b => 
+            b.UseInMemoryDatabase(Constants.Data.DatabaseName));
         
         var app = builder.Build();
         
