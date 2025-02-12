@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Workshop.Shared.Data;
 using Workshop.WebApi.Auth.Infrastructure;
 using Workshop.WebApi.Auth.Infrastructure.Authentication;
+using Workshop.WebApi.Auth.Infrastructure.DI;
 
 namespace Workshop.WebApi.Auth;
 
@@ -24,6 +25,9 @@ public class Program
 
         builder.Services.AddDbContext<UserDbContext>(b => 
             b.UseInMemoryDatabase(Constants.Data.DatabaseName));
+
+        builder.Services.RegisterConfigurations(builder.Configuration);
+        builder.Services.RegisterDependencies();
         
         var app = builder.Build();
         
