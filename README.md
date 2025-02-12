@@ -1,2 +1,1 @@
-# workshop-webapi-auth
-A solution containing several examples of authentication schemas for web APIs.
+Several test project containing examples of authentication schemas for ASP.NET Core-based web services.
