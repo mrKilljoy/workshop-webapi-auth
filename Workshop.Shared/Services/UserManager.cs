@@ -1,11 +1,27 @@
-﻿using Workshop.Shared.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Workshop.Shared.Data;
+using Workshop.Shared.Models;
 
 namespace Workshop.Shared.Services;
 
 public class UserManager : IUserManager
 {
+    private readonly UserDbContext _dbContext;
+
+    public UserManager(UserDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+    
     public Task<User> Get(string login)
     {
-        throw new NotImplementedException();
+        return _dbContext.Users.FirstOrDefaultAsync(x => x.Login.Equals(login, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    public Task<User> Get(string login, string password)
+    {
+        return _dbContext.Users.FirstOrDefaultAsync(x =>
+            x.Login.Equals(login, StringComparison.InvariantCultureIgnoreCase) &&
+            x.Password.Equals(password, StringComparison.InvariantCultureIgnoreCase));
     }
 }
