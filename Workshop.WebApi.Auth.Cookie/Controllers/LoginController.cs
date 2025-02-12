@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Workshop.Shared.Services;
-using Workshop.WebApi.Auth.Infrastructure;
-using Workshop.WebApi.Auth.Models;
+using Workshop.WebApi.Auth.Cookie.Infrastructure;
+using Workshop.WebApi.Auth.Cookie.Models;
 
-namespace Workshop.WebApi.Auth.Controllers
+namespace Workshop.WebApi.Auth.Cookie.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

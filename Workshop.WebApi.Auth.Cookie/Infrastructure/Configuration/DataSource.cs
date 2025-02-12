@@ -1,4 +1,4 @@
-﻿namespace Workshop.WebApi.Auth.Infrastructure.Configuration;
+﻿namespace Workshop.WebApi.Auth.Cookie.Infrastructure.Configuration;
 
 public class DataSource
 {

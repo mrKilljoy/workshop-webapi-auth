@@ -1,4 +1,4 @@
-﻿namespace Workshop.WebApi.Auth.Models;
+﻿namespace Workshop.WebApi.Auth.Cookie.Models;
 
 public class CredentialsModel
 {

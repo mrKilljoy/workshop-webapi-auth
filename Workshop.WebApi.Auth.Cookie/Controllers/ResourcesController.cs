@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Workshop.WebApi.Auth.Infrastructure;
+using Workshop.WebApi.Auth.Cookie.Infrastructure;
 
-namespace Workshop.WebApi.Auth.Controllers;
+namespace Workshop.WebApi.Auth.Cookie.Controllers;
 
 [Route("api/[controller]")]
 public class ResourcesController : ControllerBase

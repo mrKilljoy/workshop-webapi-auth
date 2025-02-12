@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Workshop.Shared.Services;
 
-namespace Workshop.WebApi.Auth.Infrastructure.Authentication;
+namespace Workshop.WebApi.Auth.Cookie.Infrastructure.Authentication;
 
 public class CustomCookieAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
@@ -73,6 +73,6 @@ public class CustomCookieAuthenticationHandler : AuthenticationHandler<Authentic
     
     private async Task<bool> VerifyUserPresence(string login)
     {
-        return _userManager.Get(login) is not null;
+        return await _userManager.Get(login) is not null;
     }
 }
