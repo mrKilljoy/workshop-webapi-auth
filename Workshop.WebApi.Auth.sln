@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.WebApi.Auth", "Workshop.WebApi.Auth\Workshop.WebApi.Auth.csproj", "{9759557F-5F7D-485E-9F91-6E33DA3F681F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Shared", "Workshop.Shared\Workshop.Shared.csproj", "{F48213D8-016C-4FA6-A761-68C6A814E1B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F48213D8-016C-4FA6-A761-68C6A814E1B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F48213D8-016C-4FA6-A761-68C6A814E1B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F48213D8-016C-4FA6-A761-68C6A814E1B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F48213D8-016C-4FA6-A761-68C6A814E1B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
