@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.WebApi.Auth", "Workshop.WebApi.Auth\Workshop.WebApi.Auth.csproj", "{9759557F-5F7D-485E-9F91-6E33DA3F681F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9759557F-5F7D-485E-9F91-6E33DA3F681F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
