@@ -10,7 +10,7 @@ namespace Workshop.WebApi.Auth;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -39,11 +39,11 @@ public class Program
         
         app.MapControllers();
 
-        if (app.Configuration.IsTestDataNeeded())
+        if (app.Configuration.UseTestData())
         {
-            app.Services.AddTestData();
+            await app.Services.AddTestData();
         }
 
-        app.Run();
+        await app.RunAsync();
     }
 }
