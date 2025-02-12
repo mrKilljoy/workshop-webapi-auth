@@ -5,6 +5,14 @@ namespace Workshop.Shared.Data;
 
 public class UserDbContext : DbContext
 {
+    public UserDbContext() : base()
+    {
+    }
+
+    public UserDbContext(DbContextOptions options) : base(options)
+    {
+    }
+
     public virtual DbSet<User> Users { get; set; }
 
     public async Task AddTestData()
