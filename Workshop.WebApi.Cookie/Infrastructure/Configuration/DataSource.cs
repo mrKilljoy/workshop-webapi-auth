@@ -1,8 +1,19 @@
-﻿namespace Workshop.WebApi.Cookie.Infrastructure.Configuration;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Workshop.WebApi.Cookie.Infrastructure.Configuration;
 
 public class DataSource
 {
-    public string Type { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public DataSourceType Type { get; set; }
 
     public bool UseTestData { get; set; }
+}
+
+public enum DataSourceType
+{
+    [EnumMember(Value = "inmemory")]
+    InMemory
 }
