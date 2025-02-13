@@ -19,5 +19,11 @@ public class ResourcesController : ControllerBase
     {
         return Task.FromResult((IActionResult)Ok("Here is the protected resource #1"));
     }
+    
+    [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName)]
+    [HttpGet("protected-2")]
+    public Task<IActionResult> GetProtectedResourceTwo()
+    {
+        return Task.FromResult((IActionResult)Ok("Here is the protected resource #2"));
     }
 }
