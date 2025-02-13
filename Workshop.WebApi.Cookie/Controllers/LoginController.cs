@@ -12,11 +12,13 @@ namespace Workshop.WebApi.Cookie.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IUserManager _userManager;
+        private readonly ITokenGenerator _tokenGenerator;
         private readonly IDataProtector _dataProtector;
 
-        public LoginController(IDataProtectionProvider idp, IUserManager userManager)
+        public LoginController(IDataProtectionProvider idp, IUserManager userManager, ITokenGenerator tokenGenerator)
         {
             _userManager = userManager;
+            _tokenGenerator = tokenGenerator;
             _dataProtector = idp.CreateProtector(Constants.Authentication.DataProtectorName);
         }
         
@@ -33,6 +35,19 @@ namespace Workshop.WebApi.Cookie.Controllers
     
             CreateAuthenticationCookie(request);
             return Ok("Login was successful");
+        }
+
+        [HttpPost("jwt")]
+        public async Task<IActionResult> JwtLogin([FromBody] CredentialsModel request)
+        {
+            if (!await ValidateLogin(request))
+            {
+                return Unauthorized();
+            }
+
+            var token = _tokenGenerator.Generate(request);
+
+            return Ok(token);
         }
 
         private async Task<bool> ValidateLogin(CredentialsModel model)

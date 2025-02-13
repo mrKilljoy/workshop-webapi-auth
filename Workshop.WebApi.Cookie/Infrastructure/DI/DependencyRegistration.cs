@@ -17,6 +17,7 @@ public static class DependencyRegistration
     public static IServiceCollection RegisterDependencies(this IServiceCollection services)
     {
         services.AddTransient<IUserManager, UserManager>();
+        services.AddTransient<ITokenGenerator, JwtTokenGenerator>();
         
         return services;
     }
@@ -67,6 +68,7 @@ public static class DependencyRegistration
                     ValidAudience = Constants.Authentication.JwtAudience,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(encKey.EncryptionKey)),
+                    RequireExpirationTime = true
                 };
             });
         
