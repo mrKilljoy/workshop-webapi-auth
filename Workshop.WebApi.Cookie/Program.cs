@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Workshop.Shared.Data;
 using Workshop.WebApi.Cookie.Infrastructure.DI;
 using Workshop.WebApi.Cookie.Infrastructure.Extensions;
 using Workshop.WebApi.Cookie.Infrastructure;
-using Workshop.WebApi.Cookie.Infrastructure.Authentication;
 
 namespace Workshop.WebApi.Cookie;
 
@@ -14,11 +12,9 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services
-            .AddAuthentication(Constants.Authentication.Cookie)
-            .AddScheme<AuthenticationSchemeOptions, CustomCookieAuthenticationHandler>(
-                Constants.Authentication.Cookie,
-                null);
+        builder.Services.RegisterConfigurations(builder.Configuration);
+        
+        builder.Services.AddCustomAuthentication(builder.Configuration);
         builder.Services.AddAuthorization();
 
         builder.Services.AddControllers();
@@ -26,8 +22,7 @@ public class Program
 
         builder.Services.AddDbContext<UserDbContext>(b => 
             b.UseInMemoryDatabase(Constants.Data.DatabaseName));
-
-        builder.Services.RegisterConfigurations(builder.Configuration);
+        
         builder.Services.RegisterDependencies();
         
         var app = builder.Build();
