@@ -13,10 +13,11 @@ public class ResourcesController : ControllerBase
         return Ok("Here is the public resource");
     }
 
-    [Authorize(AuthenticationSchemes = Constants.Authentication.Cookie)]
-    [HttpGet("protected")]
-    public async Task<IActionResult> GetProtectedResource()
+    [Authorize(AuthenticationSchemes = Constants.Authentication.CookieSchemaName)]
+    [HttpGet("protected-1")]
+    public Task<IActionResult> GetProtectedResourceOne()
     {
-        return Ok("Here is the protected resource");
+        return Task.FromResult((IActionResult)Ok("Here is the protected resource #1"));
+    }
     }
 }

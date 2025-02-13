@@ -33,13 +33,13 @@ public static class DependencyRegistration
     public static IServiceCollection AddCustomAuthentication(
         this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        var encKey = configuration?.GetSection(Constants.Configuration.DataSourceSection)?.Get<Security>();
+        var encKey = configuration?.GetSection(Constants.Configuration.SecuritySection)?.Get<Security>();
 
         var authBuilder = serviceCollection
             .AddAuthentication();
         
         authBuilder.AddScheme<AuthenticationSchemeOptions, CustomCookieAuthenticationHandler>(
-                Constants.Authentication.Cookie,
+                Constants.Authentication.CookieSchemaName,
                 null);
         
         if (string.IsNullOrEmpty(encKey?.EncryptionKey))
@@ -49,7 +49,7 @@ public static class DependencyRegistration
         }
 
         authBuilder.AddScheme<CustomJwtBearerAuthenticationSchemeOptions, CustomJwtBearerAuthenticationHandler>(
-            Constants.Authentication.Jwt,
+            Constants.Authentication.JwtSchemaName,
             options =>
             {
                 options.ValidationParameters = new TokenValidationParameters()

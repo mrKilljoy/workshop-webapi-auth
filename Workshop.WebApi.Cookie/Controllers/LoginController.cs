@@ -44,7 +44,7 @@ namespace Workshop.WebApi.Cookie.Controllers
             var encryptedCookie = _dataProtector
                 .Protect(model.Login);
             
-            Response.Cookies.Append(Constants.Authentication.Cookie, encryptedCookie);
+            Response.Cookies.Append(Constants.Authentication.CookieSchemaName, encryptedCookie);
         }
     }
 }

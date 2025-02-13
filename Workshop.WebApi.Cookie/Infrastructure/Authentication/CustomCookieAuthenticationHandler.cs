@@ -26,7 +26,7 @@ public class CustomCookieAuthenticationHandler : AuthenticationHandler<Authentic
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Cookies.TryGetValue(Constants.Authentication.Cookie, out var encryptedCookie))
+        if (!Request.Cookies.TryGetValue(Constants.Authentication.CookieSchemaName, out var encryptedCookie))
         {
             Response.StatusCode = (int)HttpStatusCode.Forbidden;
             return AuthenticateResult.Fail("Required cookie not found");
