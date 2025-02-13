@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Workshop.Shared.Data;
 using Workshop.Shared.Services;
 using Workshop.WebApi.Cookie.Infrastructure.Authentication;
+using Workshop.WebApi.Cookie.Infrastructure.Authentication.Handlers;
 using Workshop.WebApi.Cookie.Infrastructure.Configuration;
 using Workshop.WebApi.Cookie.Infrastructure.Exceptions;
 

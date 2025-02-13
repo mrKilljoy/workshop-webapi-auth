@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Workshop.Shared.Services;
 using Workshop.WebApi.Cookie.Infrastructure;
+using Workshop.WebApi.Cookie.Infrastructure.Authentication;
 using Workshop.WebApi.Cookie.Models;
 
 namespace Workshop.WebApi.Cookie.Controllers
