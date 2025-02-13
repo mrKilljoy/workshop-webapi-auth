@@ -15,13 +15,13 @@ public class UserManager : IUserManager
     
     public Task<User> Get(string login)
     {
-        return _dbContext.Users.FirstOrDefaultAsync(x => x.Login.Equals(login, StringComparison.InvariantCultureIgnoreCase));
+        return _dbContext.Users.FirstOrDefaultAsync(x => x.Login.Equals(login));
     }
 
     public Task<User> Get(string login, string password)
     {
         return _dbContext.Users.FirstOrDefaultAsync(x =>
-            x.Login.Equals(login, StringComparison.InvariantCultureIgnoreCase) &&
-            x.Password.Equals(password, StringComparison.InvariantCultureIgnoreCase));
+            x.Login.Equals(login) &&
+            x.Password.Equals(password));
     }
 }
