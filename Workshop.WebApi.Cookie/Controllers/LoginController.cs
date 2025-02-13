@@ -19,6 +19,9 @@ namespace Workshop.WebApi.Cookie.Controllers
             _dataProtector = idp.CreateProtector(Constants.Authentication.DataProtectorName);
         }
         
+        /// <summary>
+        /// Accepts credentials from users and returns cookies to the authenticated ones.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Login([FromBody]CredentialsModel request)
         {

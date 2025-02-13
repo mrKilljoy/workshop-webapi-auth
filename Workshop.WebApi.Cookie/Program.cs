@@ -20,8 +20,7 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddDataProtection();
 
-        builder.Services.AddDbContext<UserDbContext>(b => 
-            b.UseInMemoryDatabase(Constants.Data.DatabaseName));
+        builder.Services.AddDataSource(builder.Configuration);
         
         builder.Services.RegisterDependencies();
         

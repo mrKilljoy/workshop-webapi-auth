@@ -10,10 +10,14 @@ public class DataSource
     public DataSourceType Type { get; set; }
 
     public bool UseTestData { get; set; }
+
+    public string ConnectionString { get; set; }
 }
 
 public enum DataSourceType
 {
     [EnumMember(Value = "inmemory")]
-    InMemory
+    InMemory,
+    [EnumMember(Value = "mssql")]
+    MSSQL
 }
