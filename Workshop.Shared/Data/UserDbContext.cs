@@ -13,6 +13,14 @@ public class UserDbContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.Entity<User>()
+            .HasKey(x => x.Id);
+    }
+
     public virtual DbSet<User> Users { get; set; }
 
     public async Task AddTestData()
