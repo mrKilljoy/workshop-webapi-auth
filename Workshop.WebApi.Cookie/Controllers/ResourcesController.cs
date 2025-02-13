@@ -38,4 +38,15 @@ public class ResourcesController : ControllerBase
     {
         return Task.FromResult((IActionResult)Ok("Here is the protected resource #2"));
     }
+    
+    /// <summary>
+    /// Provide a client with protected resource #3.
+    /// </summary>
+    /// <remarks>This API uses JWT bearer and cookie-based authentication schemas.</remarks>
+    [Authorize(AuthenticationSchemes = $"{Constants.Authentication.CookieSchemaName},{Constants.Authentication.JwtSchemaName}")]
+    [HttpGet("protected-3")]
+    public Task<IActionResult> GetProtectedResourceThree()
+    {
+        return Task.FromResult((IActionResult)Ok("Here is the protected resource #2"));
+    }
 }
