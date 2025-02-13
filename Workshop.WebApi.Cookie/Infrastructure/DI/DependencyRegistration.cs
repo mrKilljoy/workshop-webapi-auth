@@ -1,10 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Workshop.Shared.Data;
 using Workshop.Shared.Services;
 using Workshop.WebApi.Cookie.Infrastructure.Authentication;
 using Workshop.WebApi.Cookie.Infrastructure.Configuration;
+using Workshop.WebApi.Cookie.Infrastructure.Exceptions;
 
 namespace Workshop.WebApi.Cookie.Infrastructure.DI;
 
@@ -65,6 +68,31 @@ public static class DependencyRegistration
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(encKey.EncryptionKey)),
                 };
             });
+        
+        return serviceCollection;
+    }
+
+    public static IServiceCollection AddDataSource(this IServiceCollection serviceCollection, IConfiguration configuration)
+    {
+        var dataSourceSettings = configuration.GetSection(Constants.Configuration.DataSourceSection)?.Get<DataSource>();
+        if (dataSourceSettings is null)
+        {
+            throw new MissingDataSourceException();
+        }
+
+        switch (dataSourceSettings.Type)
+        {
+            case DataSourceType.InMemory:
+                serviceCollection.AddDbContext<UserDbContext>(b =>
+                    b.UseInMemoryDatabase(Constants.Data.DatabaseName));
+                break;
+            case DataSourceType.MSSQL:
+                serviceCollection.AddDbContext<UserDbContext>(b =>
+                    b.UseSqlServer(dataSourceSettings.ConnectionString));
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(dataSourceSettings.Type));
+        }
         
         return serviceCollection;
     }
