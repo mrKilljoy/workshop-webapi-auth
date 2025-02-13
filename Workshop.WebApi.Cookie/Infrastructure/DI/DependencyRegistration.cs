@@ -33,6 +33,7 @@ public static class DependencyRegistration
     public static IServiceCollection AddCustomAuthentication(
         this IServiceCollection serviceCollection, IConfiguration configuration)
     {
+        // private key is kept in app configuration for testing puropses
         var encKey = configuration?.GetSection(Constants.Configuration.SecuritySection)?.Get<Security>();
 
         var authBuilder = serviceCollection
