@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Workshop.Shared.Data;
 using Workshop.WebApi.Cookie.Infrastructure.DI;
 using Workshop.WebApi.Cookie.Infrastructure.Extensions;
 using Workshop.WebApi.Cookie.Infrastructure;
@@ -15,7 +13,7 @@ public class Program
         builder.Services.RegisterConfigurations(builder.Configuration);
         
         builder.Services.AddCustomAuthentication(builder.Configuration);
-        builder.Services.AddAuthorization();
+        builder.Services.AddCustomAuthorization();
 
         builder.Services.AddControllers();
         builder.Services.AddDataProtection();

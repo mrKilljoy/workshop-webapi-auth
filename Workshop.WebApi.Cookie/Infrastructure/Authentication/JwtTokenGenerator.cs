@@ -24,8 +24,8 @@ public class JwtTokenGenerator : ITokenGenerator
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, model.Login),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.Name, model.Login)
+            new Claim(ClaimTypes.Name, model.Login),
+            new Claim(Constants.Authentication.Claims.TestClaimName, Constants.Authentication.Claims.TestClaimValue)
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GetEncryptionKey()));

@@ -32,7 +32,7 @@ public class ResourcesController : ControllerBase
     /// Provide a client with protected resource #2.
     /// </summary>
     /// <remarks>This API uses JWT bearer-based authentication.</remarks>
-    [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName)]
+    [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName, Policy = Constants.Authentication.PolicyName)]
     [HttpGet("protected-2")]
     public Task<IActionResult> GetProtectedResourceTwo()
     {

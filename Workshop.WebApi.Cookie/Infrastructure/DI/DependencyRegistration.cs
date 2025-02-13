@@ -60,18 +60,31 @@ public static class DependencyRegistration
             {
                 options.ValidationParameters = new TokenValidationParameters()
                 {
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero,
                     ValidateIssuer = true,
                     ValidIssuer = Constants.Authentication.JwtIssuer,
                     ValidateAudience = true,
                     ValidAudience = Constants.Authentication.JwtAudience,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(encKey.EncryptionKey)),
-                    RequireExpirationTime = true
+                    RequireExpirationTime = true,
+                    ValidateLifetime = true,
                 };
             });
         
+        return serviceCollection;
+    }
+
+    public static IServiceCollection AddCustomAuthorization(this IServiceCollection serviceCollection)
+    {
+        serviceCollection.AddAuthorization(x =>
+        {
+            x.AddPolicy(
+                Constants.Authentication.PolicyName,
+                p => p.RequireClaim(
+                    Constants.Authentication.Claims.TestClaimName,
+                    Constants.Authentication.Claims.TestClaimName));
+        });
+
         return serviceCollection;
     }
 
