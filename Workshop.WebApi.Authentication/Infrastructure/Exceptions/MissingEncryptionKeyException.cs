@@ -1,4 +1,4 @@
-﻿namespace Workshop.WebApi.Cookie.Infrastructure.Exceptions;
+﻿namespace Workshop.WebApi.Authentication.Infrastructure.Exceptions;
 
 [Serializable]
 public class MissingEncryptionKeyException : Exception

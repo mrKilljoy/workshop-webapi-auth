@@ -1,8 +1,8 @@
-using Workshop.WebApi.Cookie.Infrastructure.DI;
-using Workshop.WebApi.Cookie.Infrastructure.Extensions;
-using Workshop.WebApi.Cookie.Infrastructure;
+using Workshop.WebApi.Authentication.Infrastructure.DI;
+using Workshop.WebApi.Authentication.Infrastructure.Extensions;
+using Workshop.WebApi.Authentication.Infrastructure;
 
-namespace Workshop.WebApi.Cookie;
+namespace Workshop.WebApi.Authentication;
 
 public class Program
 {

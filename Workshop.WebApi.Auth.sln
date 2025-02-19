@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.WebApi.Cookie", "Workshop.WebApi.Cookie\Workshop.WebApi.Cookie.csproj", "{9759557F-5F7D-485E-9F91-6E33DA3F681F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.WebApi.Authentication", "Workshop.WebApi.Authentication\Workshop.WebApi.Authentication.csproj", "{9759557F-5F7D-485E-9F91-6E33DA3F681F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Shared", "Workshop.Shared\Workshop.Shared.csproj", "{F48213D8-016C-4FA6-A761-68C6A814E1B2}"
 EndProject

@@ -1,6 +1,6 @@
 ﻿using Workshop.Shared.Data;
 
-namespace Workshop.WebApi.Cookie.Infrastructure.Extensions;
+namespace Workshop.WebApi.Authentication.Infrastructure.Extensions;
 
 public static class ServiceProviderExtensions
 {

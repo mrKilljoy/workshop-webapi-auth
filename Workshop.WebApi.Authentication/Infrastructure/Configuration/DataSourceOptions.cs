@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Workshop.WebApi.Cookie.Infrastructure.Configuration;
+namespace Workshop.WebApi.Authentication.Infrastructure.Configuration;
 
 public class DataSourceOptions
 {

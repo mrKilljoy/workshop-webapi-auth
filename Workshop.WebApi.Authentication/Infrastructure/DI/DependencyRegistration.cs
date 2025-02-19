@@ -6,12 +6,12 @@ using Microsoft.IdentityModel.Tokens;
 using Workshop.Shared.Configuration;
 using Workshop.Shared.Data;
 using Workshop.Shared.Services;
-using Workshop.WebApi.Cookie.Infrastructure.Authentication;
-using Workshop.WebApi.Cookie.Infrastructure.Authentication.Handlers;
-using Workshop.WebApi.Cookie.Infrastructure.Configuration;
-using Workshop.WebApi.Cookie.Infrastructure.Exceptions;
+using Workshop.WebApi.Authentication.Infrastructure.Authentication;
+using Workshop.WebApi.Authentication.Infrastructure.Authentication.Handlers;
+using Workshop.WebApi.Authentication.Infrastructure.Configuration;
+using Workshop.WebApi.Authentication.Infrastructure.Exceptions;
 
-namespace Workshop.WebApi.Cookie.Infrastructure.DI;
+namespace Workshop.WebApi.Authentication.Infrastructure.DI;
 
 public static class DependencyRegistration
 {

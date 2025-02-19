@@ -2,11 +2,11 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Workshop.WebApi.Cookie.Infrastructure.Configuration;
-using Workshop.WebApi.Cookie.Infrastructure.Exceptions;
-using Workshop.WebApi.Cookie.Models;
+using Workshop.WebApi.Authentication.Infrastructure.Configuration;
+using Workshop.WebApi.Authentication.Infrastructure.Exceptions;
+using Workshop.WebApi.Authentication.Models;
 
-namespace Workshop.WebApi.Cookie.Infrastructure.Authentication;
+namespace Workshop.WebApi.Authentication.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : ITokenGenerator
 {

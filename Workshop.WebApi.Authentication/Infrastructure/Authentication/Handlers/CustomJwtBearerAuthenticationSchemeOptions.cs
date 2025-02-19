@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Workshop.WebApi.Cookie.Infrastructure.Authentication.Handlers;
+namespace Workshop.WebApi.Authentication.Infrastructure.Authentication.Handlers;
 
 public class CustomJwtBearerAuthenticationSchemeOptions : AuthenticationSchemeOptions
 {

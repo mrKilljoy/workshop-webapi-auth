@@ -4,7 +4,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 
-namespace Workshop.WebApi.Cookie.Infrastructure.Authentication.Handlers;
+namespace Workshop.WebApi.Authentication.Infrastructure.Authentication.Handlers;
 
 public class CustomJwtBearerAuthenticationHandler : AuthenticationHandler<CustomJwtBearerAuthenticationSchemeOptions>
 {
