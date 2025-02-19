@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -12,6 +13,7 @@ using Workshop.WebApi.Authentication.Infrastructure.Authentication;
 using Workshop.WebApi.Authentication.Infrastructure.Authentication.Handlers;
 using Workshop.WebApi.Authentication.Infrastructure.Configuration;
 using Workshop.WebApi.Authentication.Infrastructure.Exceptions;
+using Workshop.WebApi.Authentication.Infrastructure.Swagger;
 
 namespace Workshop.WebApi.Authentication.Infrastructure.DI;
 
@@ -108,7 +110,18 @@ public static class DependencyRegistration
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 x.IncludeXmlComments(xmlPath);
+
+                var securityScheme = new OpenApiSecurityScheme()
+                {
+                    BearerFormat = "Jwt",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                };
+                x.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, securityScheme);
                 
+                x.OperationFilter<CustomAuthorizeOperationFilter>();
             });
     }
 
