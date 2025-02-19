@@ -9,6 +9,9 @@ using Workshop.WebApi.Authentication.Models;
 
 namespace Workshop.WebApi.Authentication.Controllers
 {
+    /// <summary>
+    /// A set of APIs used for user authentication.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
@@ -32,7 +35,15 @@ namespace Workshop.WebApi.Authentication.Controllers
         /// <summary>
         /// Accepts credentials from users and returns cookies to the authenticated ones.
         /// </summary>
+        /// <param name="request">A payload with user credentials.</param>
+        /// <returns>An operation result.</returns>
+        /// <response code="200">Login was successful.</response>
+        /// <response code="401">Invalid credentials.</response>
+        [AllowAnonymous]
         [HttpPost]
+        [Consumes(typeof(CredentialsModel), Constants.ContentType.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CookieLogin([FromBody]CredentialsModel request)
         {
             if (!await ValidateLogin(request))
@@ -41,10 +52,21 @@ namespace Workshop.WebApi.Authentication.Controllers
             }
     
             CreateAuthenticationCookie(request);
-            return Ok("Login was successful");
+            return Ok();
         }
 
+        /// <summary>
+        /// Accepts credentials from users and returns pairs of tokens to the authenticated ones.
+        /// </summary>
+        /// <param name="request">A payload with user credentials.</param>
+        /// <returns>An operation result.</returns>
+        /// <response code="200">Login was successful.</response>
+        /// <response code="401">Invalid credentials.</response>
+        [AllowAnonymous]
         [HttpPost("jwt")]
+        [Consumes(typeof(CredentialsModel), Constants.ContentType.Json)]
+        [ProducesResponseType(typeof(TokenPairModel), StatusCodes.Status200OK, Constants.ContentType.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> JwtLogin([FromBody]CredentialsModel request)
         {
             if (!await ValidateLogin(request))
@@ -61,8 +83,18 @@ namespace Workshop.WebApi.Authentication.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Use a refresh token to generate a valid access token.
+        /// </summary>
+        /// <param name="request">A payload with a valid refresh token.</param>
+        /// <returns>An operation result.</returns>
+        /// <response code="200">Tokens were provided.</response>
+        /// <response code="400">Invalid payload.</response>
         [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName)]
         [HttpPost("refresh")]
+        [Consumes(typeof(RefreshTokenModel), Constants.ContentType.Json)]
+        [ProducesResponseType(typeof(TokenPairModel), StatusCodes.Status200OK, Constants.ContentType.Json)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenModel request)
         {
             if (!await ValidateRefreshToken(request.RefreshToken))

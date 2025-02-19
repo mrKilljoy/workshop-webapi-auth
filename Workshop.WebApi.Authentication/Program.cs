@@ -21,6 +21,8 @@ public class Program
         builder.Services.AddDataSource(builder.Configuration);
         
         builder.Services.RegisterDependencies();
+
+        builder.Services.AddSwaggerSupport();
         
         var app = builder.Build();
         
@@ -28,6 +30,12 @@ public class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+        
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
         
         app.MapControllers();
 

@@ -20,6 +20,8 @@ public class JwtTokenGenerator : ITokenGenerator
     
     public string Generate(string login)
     {
+        ArgumentNullException.ThrowIfNull(login, nameof(login));
+        
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, login),
