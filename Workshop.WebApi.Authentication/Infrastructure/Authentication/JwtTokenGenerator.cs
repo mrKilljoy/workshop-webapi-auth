@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Workshop.WebApi.Authentication.Infrastructure.Configuration;
 using Workshop.WebApi.Authentication.Infrastructure.Exceptions;
-using Workshop.WebApi.Authentication.Models;
 
 namespace Workshop.WebApi.Authentication.Infrastructure.Authentication;
 
@@ -44,7 +43,7 @@ public class JwtTokenGenerator : ITokenGenerator
     private string GetEncryptionKey()
     {
         return _configuration?
-            .GetSection(Constants.Configuration.SecuritySection)?
+            .GetSection(SecurityOptions.SectionName)?
             .Get<SecurityOptions>()?.EncryptionKey
                ?? throw new MissingEncryptionKeyException();
     }

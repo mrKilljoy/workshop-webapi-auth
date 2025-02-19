@@ -22,10 +22,4 @@ public static class Constants
     {
         public const string DatabaseName = "users_db";
     }
-    
-    public static class Configuration
-    {
-        public const string DataSourceSection = "DataSource";
-        public const string SecuritySection = "Security";
-    }
 }
