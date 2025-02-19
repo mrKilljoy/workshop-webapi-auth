@@ -1,4 +1,5 @@
 ﻿using Workshop.Shared.Data;
+using Workshop.Shared.Extensions;
 
 namespace Workshop.WebApi.Authentication.Infrastructure.Extensions;
 
