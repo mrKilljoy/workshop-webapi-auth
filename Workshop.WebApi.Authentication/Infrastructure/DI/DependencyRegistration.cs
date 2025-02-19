@@ -109,7 +109,8 @@ public static class DependencyRegistration
                 // Add generated XML files with comments
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                x.IncludeXmlComments(xmlPath);
+                x.IncludeXmlComments(xmlPath, includeControllerXmlComments: true);
+                x.EnableAnnotations();
 
                 var securityScheme = new OpenApiSecurityScheme()
                 {
