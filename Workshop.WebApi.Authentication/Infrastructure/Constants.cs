@@ -22,4 +22,10 @@ public static class Constants
     {
         public const string DatabaseName = "users_db";
     }
+    
+    public static class ContentType
+    {
+        public const string Json = "application/json";
+        public const string PlainText = "text/plain";
+    }
 }

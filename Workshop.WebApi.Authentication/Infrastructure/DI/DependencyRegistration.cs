@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Workshop.Shared.Configuration;
 using Workshop.Shared.Data;
 using Workshop.Shared.Services;
@@ -28,11 +30,9 @@ public static class DependencyRegistration
         this IServiceCollection serviceCollection,
         IConfiguration configuration)
     {
-        serviceCollection.Configure<DataSourceOptions>(configuration.GetSection(DataSourceOptions.SectionName));
-        serviceCollection.Configure<SecurityOptions>(configuration.GetSection(SecurityOptions.SectionName));
-        serviceCollection.Configure<RefreshTokenManagerOptions>(configuration.GetSection(RefreshTokenManagerOptions.SectionName));
-
-        return serviceCollection;
+        return serviceCollection.Configure<DataSourceOptions>(configuration.GetSection(DataSourceOptions.SectionName))
+            .Configure<SecurityOptions>(configuration.GetSection(SecurityOptions.SectionName))
+            .Configure<RefreshTokenManagerOptions>(configuration.GetSection(RefreshTokenManagerOptions.SectionName));
     }
 
     /// <summary>
@@ -89,6 +89,27 @@ public static class DependencyRegistration
         });
 
         return serviceCollection;
+    }
+
+    public static IServiceCollection AddSwaggerSupport(this IServiceCollection serviceCollection)
+    {
+        return serviceCollection
+            .AddEndpointsApiExplorer()
+            .AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Version = "v1",
+                    Title = "ASP.NET Core Web API Authentication Test",
+                    Description = "This page provides the list of available API methods for testing purposes."
+                });
+                
+                // Add generated XML files with comments
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                x.IncludeXmlComments(xmlPath);
+                
+            });
     }
 
     public static IServiceCollection AddDataSource(this IServiceCollection serviceCollection, IConfiguration configuration)
