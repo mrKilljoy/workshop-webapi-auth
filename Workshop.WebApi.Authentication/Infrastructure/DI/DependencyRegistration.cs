@@ -85,7 +85,7 @@ public static class DependencyRegistration
                 Constants.Authentication.PolicyName,
                 p => p.RequireClaim(
                     Constants.Authentication.Claims.TestClaimName,
-                    Constants.Authentication.Claims.TestClaimName));
+                    Constants.Authentication.Claims.TestClaimValue));
         });
 
         return serviceCollection;
