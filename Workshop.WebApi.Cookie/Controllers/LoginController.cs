@@ -33,7 +33,7 @@ namespace Workshop.WebApi.Cookie.Controllers
         /// Accepts credentials from users and returns cookies to the authenticated ones.
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody]CredentialsModel request)
+        public async Task<IActionResult> CookieLogin([FromBody]CredentialsModel request)
         {
             if (!await ValidateLogin(request))
             {
@@ -45,7 +45,7 @@ namespace Workshop.WebApi.Cookie.Controllers
         }
 
         [HttpPost("jwt")]
-        public async Task<IActionResult> JwtLogin([FromBody] CredentialsModel request)
+        public async Task<IActionResult> JwtLogin([FromBody]CredentialsModel request)
         {
             if (!await ValidateLogin(request))
             {
@@ -62,8 +62,8 @@ namespace Workshop.WebApi.Cookie.Controllers
         }
 
         [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName)]
-        [HttpPost("jwt/refresh")]
-        public async Task<IActionResult> JwtRefresh([FromBody] RefreshTokenModel request)
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenModel request)
         {
             if (!await ValidateRefreshToken(request.RefreshToken))
                 return BadRequest("Invalid token");
