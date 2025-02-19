@@ -1,21 +1,19 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Workshop.WebApi.Authentication.Infrastructure.Configuration;
-using Workshop.WebApi.Authentication.Infrastructure.Exceptions;
 
 namespace Workshop.WebApi.Authentication.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : ITokenGenerator
 {
-    private const int TokenExpirationTimeSeconds = 60 * 10;  // ideally, it should be a configurable parameter
-    
-    private readonly IConfiguration _configuration;
+    private readonly IOptions<SecurityOptions> _options;
 
-    public JwtTokenGenerator(IConfiguration configuration)
+    public JwtTokenGenerator(IOptions<SecurityOptions> options)
     {
-        _configuration = configuration;
+        _options = options;
     }
     
     public string Generate(string login)
@@ -36,17 +34,13 @@ public class JwtTokenGenerator : ITokenGenerator
             issuer: Constants.Authentication.JwtIssuer,
             audience: Constants.Authentication.JwtAudience,
             claims: claims,
-            expires: DateTime.Now.AddSeconds(TokenExpirationTimeSeconds),
+            expires: DateTime.Now.AddSeconds(GetTokenLifetime()),
             signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    private string GetEncryptionKey()
-    {
-        return _configuration?
-            .GetSection(SecurityOptions.SectionName)?
-            .Get<SecurityOptions>()?.EncryptionKey
-               ?? throw new MissingEncryptionKeyException();
-    }
+    private string GetEncryptionKey() => _options.Value?.EncryptionKey;
+
+    private int GetTokenLifetime() => _options.Value?.AccessTokenLifetimeSeconds ?? default;
 }
