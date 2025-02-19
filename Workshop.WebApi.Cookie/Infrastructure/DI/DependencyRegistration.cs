@@ -3,6 +3,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Workshop.Shared.Configuration;
 using Workshop.Shared.Data;
 using Workshop.Shared.Services;
 using Workshop.WebApi.Cookie.Infrastructure.Authentication;
@@ -17,6 +18,7 @@ public static class DependencyRegistration
     public static IServiceCollection RegisterDependencies(this IServiceCollection services)
     {
         services.AddTransient<IUserManager, UserManager>();
+        services.AddTransient<ITokenManager, RefreshTokenManager>();
         services.AddTransient<ITokenGenerator, JwtTokenGenerator>();
         
         return services;
@@ -68,7 +70,7 @@ public static class DependencyRegistration
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(encKey.EncryptionKey)),
                     RequireExpirationTime = true,
-                    ValidateLifetime = true,
+                    ValidateLifetime = true
                 };
             });
         

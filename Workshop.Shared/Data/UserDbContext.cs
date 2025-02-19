@@ -19,9 +19,22 @@ public class UserDbContext : DbContext
         
         modelBuilder.Entity<User>()
             .HasKey(x => x.Id);
+
+        modelBuilder.Entity<RefreshToken>()
+            .HasKey(x => x.UserId);
+        
+        modelBuilder.Entity<RefreshToken>()
+            .HasIndex(x => x.Value)
+            .IsUnique();
+        
+        modelBuilder.Entity<RefreshToken>()
+            .Property(p => p.Value)
+            .IsRequired();
     }
 
     public virtual DbSet<User> Users { get; set; }
+    
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
     public async Task AddTestData()
     {

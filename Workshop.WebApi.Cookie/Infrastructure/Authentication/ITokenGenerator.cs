@@ -4,5 +4,5 @@ namespace Workshop.WebApi.Cookie.Infrastructure.Authentication;
 
 public interface ITokenGenerator
 {
-    string Generate(CredentialsModel model);
+    string Generate(string login);
 }

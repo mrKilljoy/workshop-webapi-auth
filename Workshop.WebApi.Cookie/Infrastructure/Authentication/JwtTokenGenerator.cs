@@ -19,12 +19,12 @@ public class JwtTokenGenerator : ITokenGenerator
         _configuration = configuration;
     }
     
-    public string Generate(CredentialsModel model)
+    public string Generate(string login)
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, model.Login),
-            new Claim(ClaimTypes.Name, model.Login),
+            new Claim(JwtRegisteredClaimNames.Sub, login),
+            new Claim(ClaimTypes.Name, login),
             new Claim(Constants.Authentication.Claims.TestClaimName, Constants.Authentication.Claims.TestClaimValue)
         };
 
