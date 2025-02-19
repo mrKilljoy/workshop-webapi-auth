@@ -4,8 +4,10 @@ using Newtonsoft.Json.Converters;
 
 namespace Workshop.WebApi.Cookie.Infrastructure.Configuration;
 
-public class DataSource
+public class DataSourceOptions
 {
+    public const string SectionName = "DataSource";
+    
     [JsonConverter(typeof(StringEnumConverter))]
     public DataSourceType Type { get; set; }
 

@@ -45,7 +45,7 @@ public class JwtTokenGenerator : ITokenGenerator
     {
         return _configuration?
             .GetSection(Constants.Configuration.SecuritySection)?
-            .Get<Security>()?.EncryptionKey
+            .Get<SecurityOptions>()?.EncryptionKey
                ?? throw new MissingEncryptionKeyException();
     }
 }

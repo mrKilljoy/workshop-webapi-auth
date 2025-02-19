@@ -12,9 +12,9 @@ public class ResourcesController : ControllerBase
     /// </summary>
     /// <remarks>This API is available for all clients.</remarks>
     [HttpGet("public")]
-    public async Task<IActionResult> GetPublicResource()
+    public Task<IActionResult> GetPublicResource()
     {
-        return Ok("Here is the public resource");
+        return Task.FromResult<IActionResult>(Ok("Here is the public resource"));
     }
 
     /// <summary>
@@ -47,6 +47,6 @@ public class ResourcesController : ControllerBase
     [HttpGet("protected-3")]
     public Task<IActionResult> GetProtectedResourceThree()
     {
-        return Task.FromResult((IActionResult)Ok("Here is the protected resource #2"));
+        return Task.FromResult((IActionResult)Ok("Here is the protected resource #3"));
     }
 }

@@ -26,8 +26,9 @@ public static class DependencyRegistration
         this IServiceCollection serviceCollection,
         IConfiguration configuration)
     {
-        serviceCollection.Configure<DataSource>(configuration.GetSection(Constants.Configuration.DataSourceSection));
-        serviceCollection.Configure<Security>(configuration.GetSection(Constants.Configuration.SecuritySection));
+        serviceCollection.Configure<DataSourceOptions>(configuration.GetSection(DataSourceOptions.SectionName));
+        serviceCollection.Configure<SecurityOptions>(configuration.GetSection(SecurityOptions.SectionName));
+        serviceCollection.Configure<RefreshTokenManagerOptions>(configuration.GetSection(RefreshTokenManagerOptions.SectionName));
 
         return serviceCollection;
     }
@@ -38,8 +39,8 @@ public static class DependencyRegistration
     public static IServiceCollection AddCustomAuthentication(
         this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        // private key is kept in app configuration for testing puropses
-        var encKey = configuration?.GetSection(Constants.Configuration.SecuritySection)?.Get<Security>();
+        // private key is kept in app configuration for testing purposes
+        var encKey = configuration?.GetSection(SecurityOptions.SectionName)?.Get<SecurityOptions>();
 
         var authBuilder = serviceCollection
             .AddAuthentication();
@@ -90,7 +91,7 @@ public static class DependencyRegistration
 
     public static IServiceCollection AddDataSource(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        var dataSourceSettings = configuration.GetSection(Constants.Configuration.DataSourceSection)?.Get<DataSource>();
+        var dataSourceSettings = configuration.GetSection(DataSourceOptions.SectionName)?.Get<DataSourceOptions>();
         if (dataSourceSettings is null)
         {
             throw new MissingDataSourceException();
