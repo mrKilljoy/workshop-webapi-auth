@@ -1,6 +1,6 @@
 using Workshop.WebApi.Authentication.Infrastructure.DI;
 using Workshop.WebApi.Authentication.Infrastructure.Extensions;
-using Workshop.WebApi.Authentication.Infrastructure;
+using Workshop.WebApi.Authentication.Infrastructure.Filters;
 
 namespace Workshop.WebApi.Authentication;
 
@@ -15,7 +15,11 @@ public class Program
         builder.Services.AddCustomAuthentication(builder.Configuration);
         builder.Services.AddCustomAuthorization();
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers(x =>
+        {
+            x.Filters.Add<CustomGlobalExceptionFilter>();
+        });
+        
         builder.Services.AddDataProtection();
 
         builder.Services.AddDataSource(builder.Configuration);
