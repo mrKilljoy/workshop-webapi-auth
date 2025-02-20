@@ -10,6 +10,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Services.AddCustomLogging();
+
         builder.Services.RegisterConfigurations(builder.Configuration);
         
         builder.Services.AddCustomAuthentication(builder.Configuration);

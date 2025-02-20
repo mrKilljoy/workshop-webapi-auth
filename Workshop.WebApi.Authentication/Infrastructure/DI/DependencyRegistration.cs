@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Workshop.Shared.Configuration;
@@ -19,6 +20,11 @@ namespace Workshop.WebApi.Authentication.Infrastructure.DI;
 
 public static class DependencyRegistration
 {
+    public static IServiceCollection AddCustomLogging(this IServiceCollection services)
+    {
+        return services.AddLogging(x => x.AddProvider(NullLoggerProvider.Instance));    
+    }
+    
     public static IServiceCollection RegisterDependencies(this IServiceCollection services)
     {
         services.AddTransient<IUserManager, UserManager>();
