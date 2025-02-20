@@ -17,31 +17,39 @@ public class CustomJwtBearerAuthenticationHandler : AuthenticationHandler<Custom
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Headers.ContainsKey("Authorization"))
-        {
-            return AuthenticateResult.Fail("Authorization header is missing");
-        }
-
-        string authorization = Request.Headers.Authorization;
-        if (string.IsNullOrEmpty(authorization) || !authorization.StartsWith("Bearer "))
-        {
-            return AuthenticateResult.Fail("No valid token provided");
-        }
-
-        var token = authorization.Substring("Bearer ".Length).Trim();
-        var tokenHandler = new JwtSecurityTokenHandler();
         try
         {
-            var validationResult = await tokenHandler.ValidateTokenAsync(token, Options.ValidationParameters);
+            if (!Request.Headers.ContainsKey("Authorization"))
+            {
+                return AuthenticateResult.Fail("Authorization header is missing");
+            }
 
-            var principal = new ClaimsPrincipal(validationResult.ClaimsIdentity);
+            string authorization = Request.Headers.Authorization;
+            if (string.IsNullOrEmpty(authorization) || !authorization.StartsWith("Bearer "))
+            {
+                return AuthenticateResult.Fail("No valid token provided");
+            }
+
+            var token = authorization.Substring("Bearer ".Length).Trim();
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                var validationResult = await tokenHandler.ValidateTokenAsync(token, Options.ValidationParameters);
+
+                var principal = new ClaimsPrincipal(validationResult.ClaimsIdentity);
             
-            var ticket = new AuthenticationTicket(principal, Scheme.Name);
-            return AuthenticateResult.Success(ticket);
+                var ticket = new AuthenticationTicket(principal, Scheme.Name);
+                return AuthenticateResult.Success(ticket);
+            }
+            catch (Exception e)
+            {
+                return AuthenticateResult.Fail($"Token validation failed: {e.Message}");
+            }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            return AuthenticateResult.Fail($"Token validation failed: {e.Message}");
+            Logger.LogError(ex, "Unexpected authentication error (JWT)");
+            return AuthenticateResult.NoResult();
         }
     }
 }

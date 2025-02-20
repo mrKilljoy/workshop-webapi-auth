@@ -15,11 +15,15 @@ public class UserManager : IUserManager
     
     public Task<User> Get(string login)
     {
+        ArgumentException.ThrowIfNullOrEmpty(login, nameof(login));
+        
         return _dbContext.Users.FirstOrDefaultAsync(x => x.Login.Equals(login));
     }
 
     public Task<User> Get(string login, string password)
     {
+        ArgumentException.ThrowIfNullOrEmpty(login, nameof(login));
+        
         return _dbContext.Users.FirstOrDefaultAsync(x =>
             x.Login.Equals(login) &&
             x.Password.Equals(password));

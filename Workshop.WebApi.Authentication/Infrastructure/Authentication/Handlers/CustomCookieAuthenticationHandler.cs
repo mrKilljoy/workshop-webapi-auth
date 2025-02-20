@@ -26,21 +26,29 @@ public class CustomCookieAuthenticationHandler : AuthenticationHandler<Authentic
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Cookies.TryGetValue(Constants.Authentication.CookieSchemaName, out var encryptedCookie))
+        try
         {
-            Response.StatusCode = (int)HttpStatusCode.Forbidden;
-            return AuthenticateResult.Fail("Required cookie not found");
-        }
+            if (!Request.Cookies.TryGetValue(Constants.Authentication.CookieSchemaName, out var encryptedCookie))
+            {
+                Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return AuthenticateResult.Fail("Required cookie not found");
+            }
 
-        var cookieValue = DecryptCookie(encryptedCookie);
+            var cookieValue = DecryptCookie(encryptedCookie);
         
-        if (!await VerifyUserPresence(cookieValue))
-        {
-            Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            return AuthenticateResult.Fail("Username not found");
-        }
+            if (!await VerifyUserPresence(cookieValue))
+            {
+                Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                return AuthenticateResult.Fail("Username not found");
+            }
 
-        return await Task.FromResult(AuthenticateResult.Success(BuildTicket(cookieValue)));
+            return await Task.FromResult(AuthenticateResult.Success(BuildTicket(cookieValue)));
+        }
+        catch (Exception ex)
+        {
+            Logger?.LogError(ex, "Unexpected authentication error (cookies)");
+            return AuthenticateResult.NoResult();
+        }
     }
     
     private string DecryptCookie(string protectedCookie)
