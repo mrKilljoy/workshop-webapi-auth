@@ -32,8 +32,6 @@ public class ResourcesController : ControllerBase
     /// <response code="401">Access denied.</response>
     [Authorize(AuthenticationSchemes = Constants.Authentication.CookieSchemaName)]
     [HttpGet("protected-1")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     public Task<IActionResult> GetProtectedResourceOne()
     {
         return Task.FromResult((IActionResult)Ok("Here is the protected resource #1"));
@@ -47,8 +45,6 @@ public class ResourcesController : ControllerBase
     /// <response code="401">Access denied.</response>
     [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName, Policy = Constants.Authentication.PolicyName)]
     [HttpGet("protected-2")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     public Task<IActionResult> GetProtectedResourceTwo()
     {
         return Task.FromResult((IActionResult)Ok("Here is the protected resource #2"));
@@ -62,8 +58,6 @@ public class ResourcesController : ControllerBase
     /// <response code="401">Access denied.</response>
     [Authorize(AuthenticationSchemes = $"{Constants.Authentication.CookieSchemaName},{Constants.Authentication.JwtSchemaName}")]
     [HttpGet("protected-3")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
     public Task<IActionResult> GetProtectedResourceThree()
     {
         return Task.FromResult((IActionResult)Ok("Here is the protected resource #3"));

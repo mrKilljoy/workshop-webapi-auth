@@ -42,8 +42,6 @@ namespace Workshop.WebApi.Authentication.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Consumes(typeof(CredentialsModel), Constants.ContentType.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CookieLogin([FromBody]CredentialsModel request)
         {
             if (!await ValidateLogin(request))
@@ -61,12 +59,10 @@ namespace Workshop.WebApi.Authentication.Controllers
         /// <param name="request">A payload with user credentials.</param>
         /// <returns>An operation result.</returns>
         /// <response code="200">Login was successful.</response>
-        /// <response code="401">Invalid credentials.</response>
+        /// <response code="400">Invalid payload.</response>
         [AllowAnonymous]
         [HttpPost("jwt")]
         [Consumes(typeof(CredentialsModel), Constants.ContentType.Json)]
-        [ProducesResponseType(typeof(TokenPairModel), StatusCodes.Status200OK, Constants.ContentType.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> JwtLogin([FromBody]CredentialsModel request)
         {
             if (!await ValidateLogin(request))
@@ -90,11 +86,10 @@ namespace Workshop.WebApi.Authentication.Controllers
         /// <returns>An operation result.</returns>
         /// <response code="200">Tokens were provided.</response>
         /// <response code="400">Invalid payload.</response>
+        /// <response code="401">Authentication failure.</response>
         [Authorize(AuthenticationSchemes = Constants.Authentication.JwtSchemaName)]
         [HttpPost("refresh")]
         [Consumes(typeof(RefreshTokenModel), Constants.ContentType.Json)]
-        [ProducesResponseType(typeof(TokenPairModel), StatusCodes.Status200OK, Constants.ContentType.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenModel request)
         {
             if (!await ValidateRefreshToken(request.RefreshToken))
