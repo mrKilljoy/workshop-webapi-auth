@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -61,7 +60,8 @@ public static class DependencyRegistration
         
         if (string.IsNullOrEmpty(encKey?.EncryptionKey))
         {
-            Debug.WriteLine("No encryption key is provided, JWT authentication is disabled");
+            var logger = CreateLogger(Constants.Logging.ConfigurationState);
+            logger.LogDebug("No encryption key is provided, JWT authentication is disabled");
             return serviceCollection;
         }
 
@@ -156,4 +156,7 @@ public static class DependencyRegistration
         
         return serviceCollection;
     }
+
+    private static ILogger CreateLogger(string name) =>
+        LoggerFactory.Create(f => f.Services.AddCustomLogging()).CreateLogger(name);
 }

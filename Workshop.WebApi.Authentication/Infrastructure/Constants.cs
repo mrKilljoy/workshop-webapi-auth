@@ -28,4 +28,9 @@ public static class Constants
         public const string Json = "application/json";
         public const string PlainText = "text/plain";
     }
+    
+    public static class Logging
+    {
+        public const string ConfigurationState = nameof(ConfigurationState);
+    }
 }
