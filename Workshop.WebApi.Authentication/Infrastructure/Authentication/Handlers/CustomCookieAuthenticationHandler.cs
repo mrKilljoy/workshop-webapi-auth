@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Workshop.Shared.Services;
+using Workshop.WebApi.Authentication.Models;
 
 namespace Workshop.WebApi.Authentication.Infrastructure.Authentication.Handlers;
 
@@ -50,7 +51,18 @@ public class CustomCookieAuthenticationHandler : AuthenticationHandler<Authentic
             return AuthenticateResult.NoResult();
         }
     }
-    
+
+    protected override Task HandleChallengeAsync(AuthenticationProperties properties)
+    {
+        var errorResponse = new ErrorResponse()
+        {
+            Error = "Authentication failed",
+            HttpCode = Response.StatusCode
+        };
+
+        return Response.WriteAsJsonAsync(errorResponse);
+    }
+
     private string DecryptCookie(string protectedCookie)
     {
         string cookieValue;
